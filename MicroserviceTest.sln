@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceTest.Services",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceTest.Api.Email", "MicroserviceTest.Api.Email\MicroserviceTest.Api.Email.csproj", "{65F91C7B-43EE-4CE5-A17A-EAE73AC80AC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceTest.Api.User", "MicroserviceTest.Api.User\MicroserviceTest.Api.User.csproj", "{89903415-64F8-4BCC-BD78-E98051B8F91C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceTest.Contract", "MicroserviceTest.Contract\MicroserviceTest.Contract.csproj", "{A1583160-2C4D-4360-94AF-630107E34E42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{65F91C7B-43EE-4CE5-A17A-EAE73AC80AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65F91C7B-43EE-4CE5-A17A-EAE73AC80AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65F91C7B-43EE-4CE5-A17A-EAE73AC80AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89903415-64F8-4BCC-BD78-E98051B8F91C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89903415-64F8-4BCC-BD78-E98051B8F91C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89903415-64F8-4BCC-BD78-E98051B8F91C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89903415-64F8-4BCC-BD78-E98051B8F91C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1583160-2C4D-4360-94AF-630107E34E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1583160-2C4D-4360-94AF-630107E34E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1583160-2C4D-4360-94AF-630107E34E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1583160-2C4D-4360-94AF-630107E34E42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

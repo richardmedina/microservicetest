@@ -1,5 +1,6 @@
 ﻿using MicroserviceTest.Common.Services;
 using MicroserviceTest.Services.Email;
+using MicroserviceTest.Services.User;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace MicroserviceTest.Services
         public static void RegisterBusinessServices(this IServiceCollection services)
         {
             services.AddScoped<IEmailService, EmailService>();
+            services.AddSingleton<IUserService, UserService>();
         }
     }
 }
