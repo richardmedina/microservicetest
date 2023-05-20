@@ -1,3 +1,4 @@
+using MicroserviceTest.Api.Email;
 using MicroserviceTest.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,3 +28,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+SimpleClass sc = new SimpleClass();
