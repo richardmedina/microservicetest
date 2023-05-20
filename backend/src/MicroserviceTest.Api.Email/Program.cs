@@ -28,5 +28,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-SimpleClass sc = new SimpleClass();
