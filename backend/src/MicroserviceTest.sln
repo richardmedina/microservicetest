@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceTest.Common", "MicroserviceTest.Common\MicroserviceTest.Common.csproj", "{A8E26BF6-4399-4AC8-B236-686FDB93D5D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroserviceTest.Common", "MicroserviceTest.Common\MicroserviceTest.Common.csproj", "{A8E26BF6-4399-4AC8-B236-686FDB93D5D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceTest.Services", "MicroserviceTest.Services\MicroserviceTest.Services.csproj", "{222936AD-3611-4D4C-A84A-B4FA0C921492}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroserviceTest.Services", "MicroserviceTest.Services\MicroserviceTest.Services.csproj", "{222936AD-3611-4D4C-A84A-B4FA0C921492}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceTest.Api.Email", "MicroserviceTest.Api.Email\MicroserviceTest.Api.Email.csproj", "{65F91C7B-43EE-4CE5-A17A-EAE73AC80AC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroserviceTest.Api.Email", "MicroserviceTest.Api.Email\MicroserviceTest.Api.Email.csproj", "{65F91C7B-43EE-4CE5-A17A-EAE73AC80AC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceTest.Api.User", "MicroserviceTest.Api.User\MicroserviceTest.Api.User.csproj", "{89903415-64F8-4BCC-BD78-E98051B8F91C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroserviceTest.Api.User", "MicroserviceTest.Api.User\MicroserviceTest.Api.User.csproj", "{89903415-64F8-4BCC-BD78-E98051B8F91C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceTest.Contract", "MicroserviceTest.Contract\MicroserviceTest.Contract.csproj", "{A1583160-2C4D-4360-94AF-630107E34E42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroserviceTest.Contract", "MicroserviceTest.Contract\MicroserviceTest.Contract.csproj", "{A1583160-2C4D-4360-94AF-630107E34E42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceTest.CoreServices", "MicroserviceTest.CoreServices\MicroserviceTest.CoreServices.csproj", "{76B2C60C-0066-4C48-A8FF-AA6E06B4641B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{A1583160-2C4D-4360-94AF-630107E34E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1583160-2C4D-4360-94AF-630107E34E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1583160-2C4D-4360-94AF-630107E34E42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76B2C60C-0066-4C48-A8FF-AA6E06B4641B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76B2C60C-0066-4C48-A8FF-AA6E06B4641B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76B2C60C-0066-4C48-A8FF-AA6E06B4641B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76B2C60C-0066-4C48-A8FF-AA6E06B4641B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

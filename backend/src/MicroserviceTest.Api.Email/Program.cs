@@ -1,9 +1,15 @@
 using MicroserviceTest.Api.Email;
+using MicroserviceTest.Api.Email.EventHandlers;
+using MicroserviceTest.Common.Handlers;
+using MicroserviceTest.Contract.Events;
 using MicroserviceTest.Services;
+using MicroserviceTest.CoreServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IEventHandler<UserCreatedEvent>, UserCreatedEventHandler>();
+builder.Services.AddEventBusEvent<UserCreatedEvent>();
 
 builder.Services.RegisterBusinessServices();
 
