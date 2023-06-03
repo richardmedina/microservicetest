@@ -11,11 +11,11 @@ namespace MicroserviceTest.Api.Email.Controllers
     public class EmailController : ControllerBase
     {
         private readonly IEmailService emailService;
-        private readonly IEventBus _eventBus;
-        public EmailController(IEmailService emailService, IEventBus eventBus)
+        private readonly IMessageProducerCoreService _messageProducer;
+        public EmailController(IEmailService emailService, IMessageProducerCoreService messageProducer)
         {
             this.emailService = emailService;
-            this._eventBus = eventBus;
+            _messageProducer = messageProducer;
         }
 
         [HttpPost("send")]
@@ -43,7 +43,7 @@ namespace MicroserviceTest.Api.Email.Controllers
                 "richard"
             );
 
-            _eventBus.Publish(userCreatedEvent);
+            _messageProducer.PublishAsync("usercreated", userCreatedEvent);
         }
     }
 }

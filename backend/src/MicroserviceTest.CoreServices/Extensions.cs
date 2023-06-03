@@ -1,25 +1,21 @@
 ﻿using MicroserviceTest.Common.Core.Messaging;
-using MicroserviceTest.Common.Handlers;
-using MicroserviceTest.Contract.Events;
+using MicroserviceTest.Contract.Core.Messaging;
 using MicroserviceTest.CoreServices.Messaging;
-using MicroserviceTest.CoreServices.Messaging.BackgroundServices;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MicroserviceTest.CoreServices
 {
     public static class Extensions
     {
-        public static void AddEventBusEvent<TEvent>(this IServiceCollection services) where TEvent : IEvent
+        public static void AddMessageProducer(this IServiceCollection services)
         {
-            services.AddScoped<IEventBus, EventBus>();
-            //services.AddHostedService<KafkaConsumerBackgroundService<TEvent>>();
+            services.AddScoped<IMessageProducerCoreService, MessageProducerCoreService>();
+        }
+
+        public static void AddMessageConsumer(this IServiceCollection services, Action<MessageConsumerOptions> options)
+        {
+            services.Configure(options);
+            services.AddSingleton<IMessageConsumerCoreService, MessageConsumerCoreService>();
         }
     }
 }

@@ -4,12 +4,17 @@ using MicroserviceTest.Common.Handlers;
 using MicroserviceTest.Contract.Events;
 using MicroserviceTest.Services;
 using MicroserviceTest.CoreServices;
+using MicroserviceTest.Api.Email.HostedServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<IEventHandler<UserCreatedEvent>, UserCreatedEventHandler>();
-builder.Services.AddEventBusEvent<UserCreatedEvent>();
+builder.Services.AddMessageProducer();
+builder.Services.AddMessageConsumer(options => { 
+    options.Topics = new []{ "usercreated" };
+});
+builder.Services.AddHostedService<MessageConsumerBackgroundService>();
 
 builder.Services.RegisterBusinessServices();
 
