@@ -35,12 +35,12 @@ namespace MicroserviceTest.Api.Email.Controllers
         }
 
         [HttpPost("kafkapublish")]
-        public void KafkaPublish()
+        public void KafkaPublish(string userName, string firstName, string lastName)
         {
             var userCreatedEvent = new UserCreatedEvent(
-                "Ricardo",
-                "Medina",
-                "richard"
+                userName,
+                firstName,
+                lastName
             );
 
             _messageProducer.PublishAsync("usercreated", userCreatedEvent);

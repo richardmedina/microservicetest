@@ -1,4 +1,3 @@
-using MicroserviceTest.Api.Email;
 using MicroserviceTest.Api.Email.EventHandlers;
 using MicroserviceTest.Common.Handlers;
 using MicroserviceTest.Contract.Events;

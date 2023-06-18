@@ -14,9 +14,8 @@ namespace MicroserviceTest.Api.Email.HostedServices
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("StartAsync Start");
-            //await Task.Yield();
-            //await DoWork(cancellationToken);
-            await Task.Factory.StartNew(() => DoWork(cancellationToken));
+            await Task.Yield();
+            await DoWork(cancellationToken);
 
             _logger.LogInformation("StartAsync End");
         }
