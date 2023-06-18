@@ -1,5 +1,7 @@
-﻿using MicroserviceTest.Common.Services;
+﻿using MicroserviceTest.Common.Core.Messaging;
+using MicroserviceTest.Common.Services;
 using MicroserviceTest.Contract.Dtos.User;
+using MicroserviceTest.Contract.Events;
 using MicroserviceTest.Contract.Model.User;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +12,11 @@ namespace MicroserviceTest.Api.User.Controllers
     public class UserController: ControllerBase
     {
         private readonly IUserService userService;
-        public UserController(IUserService userService)
+        private readonly IMessageProducerCoreService messageProducer;
+        public UserController(IUserService userService, IMessageProducerCoreService messageProducer)
         {
             this.userService = userService;
+            this.messageProducer = messageProducer;
         }
 
         [HttpPost]
@@ -20,7 +24,15 @@ namespace MicroserviceTest.Api.User.Controllers
         {
             var createUserDto = new CreateUserDto(createUserModel.UserName, createUserModel.FirstName, createUserModel.LastName);
             var result = await userService.CreateAsync(createUserDto);
-            
+
+            var userCreatedEvent = new UserCreatedEvent(
+                "Ricardo",
+                "Medina",
+                "richard"
+            );
+
+            await messageProducer.PublishAsync("usercreated", userCreatedEvent);
+
             return result
                 ? StatusCode(StatusCodes.Status201Created)
                 : StatusCode(StatusCodes.Status500InternalServerError);

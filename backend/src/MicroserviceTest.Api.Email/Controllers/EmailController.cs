@@ -1,5 +1,7 @@
 ﻿using MicroserviceTest.Api.Email.Models.Email;
+using MicroserviceTest.Common.Core.Messaging;
 using MicroserviceTest.Common.Services;
+using MicroserviceTest.Contract.Events;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MicroserviceTest.Api.Email.Controllers
@@ -9,9 +11,11 @@ namespace MicroserviceTest.Api.Email.Controllers
     public class EmailController : ControllerBase
     {
         private readonly IEmailService emailService;
-        public EmailController(IEmailService emailService)
+        private readonly IMessageProducerCoreService _messageProducer;
+        public EmailController(IEmailService emailService, IMessageProducerCoreService messageProducer)
         {
             this.emailService = emailService;
+            _messageProducer = messageProducer;
         }
 
         [HttpPost("send")]
@@ -28,6 +32,18 @@ namespace MicroserviceTest.Api.Email.Controllers
             return result
                 ? StatusCode(StatusCodes.Status200OK)
                 : StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        [HttpPost("kafkapublish")]
+        public void KafkaPublish(string userName, string firstName, string lastName)
+        {
+            var userCreatedEvent = new UserCreatedEvent(
+                userName,
+                firstName,
+                lastName
+            );
+
+            _messageProducer.PublishAsync("usercreated", userCreatedEvent);
         }
     }
 }

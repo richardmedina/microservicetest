@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MicroserviceTest.Common\MicroserviceTest.Common.csproj" />
+    <ProjectReference Include="..\MicroserviceTest.CoreServices\MicroserviceTest.CoreServices.csproj" />
     <ProjectReference Include="..\MicroserviceTest.Services\MicroserviceTest.Services.csproj" />
   </ItemGroup>
 
