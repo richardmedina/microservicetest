@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace MicroserviceTest.Contract.Model.User
 {
-    public record UserModel(long Id, string UserName, string FirstName, string LastName);
+    public record UserModel(string Id, string UserName, string Password);
 }

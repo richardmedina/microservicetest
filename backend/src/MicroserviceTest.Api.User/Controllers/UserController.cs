@@ -22,13 +22,13 @@ namespace MicroserviceTest.Api.User.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateUserModel createUserModel)
         {
-            var createUserDto = new CreateUserDto(createUserModel.UserName, createUserModel.FirstName, createUserModel.LastName);
+            var createUserDto = new CreateUserDto(createUserModel.UserName, createUserModel.Password);
             var result = await userService.CreateAsync(createUserDto);
 
             var userCreatedEvent = new UserCreatedEvent(
-                "Ricardo",
-                "Medina",
-                "richard"
+                "UserId",
+                "richard",
+                "password"
             );
 
             await messageProducer.PublishAsync("usercreated", userCreatedEvent);
@@ -46,19 +46,19 @@ namespace MicroserviceTest.Api.User.Controllers
                 .ReadAllAsync();
 
             var userModels = userDtos
-                .Select(userDto => new UserModel(userDto.Id, userDto.UserName, userDto.FirstName, userDto.LastName));
+                .Select(userDto => new UserModel(userDto.Id, userDto.UserName, userDto.Password));
 
             return StatusCode(StatusCodes.Status200OK, userModels);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Read(long id)
+        public async Task<IActionResult> Read(string id)
         {
             var userDto = await userService.ReadAsync(id);
 
             if (userDto != null)
             {
-                var userModel = new UserModel(userDto.Id, userDto.UserName, userDto.FirstName, userDto.LastName);
+                var userModel = new UserModel(userDto.Id, userDto.UserName, userDto.Password);
                 return StatusCode(StatusCodes.Status200OK, userModel);
             }
 
@@ -66,10 +66,10 @@ namespace MicroserviceTest.Api.User.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody]UpdateUserModel updateUserModel)
+        public async Task<IActionResult> Update(string id, [FromBody]UpdateUserModel updateUserModel)
         {
-            var updateUserDto = new UpdateUserDto(updateUserModel.UserName, updateUserModel.FirstName, updateUserModel.LastName);
-            var result = await userService.UpdateAsync(id, updateUserDto);
+            var updateUserDto = new UpdateUserDto(id, updateUserModel.UserName, updateUserModel.Password);
+            var result = await userService.UpdateAsync(updateUserDto);
 
 
             return result
@@ -78,7 +78,7 @@ namespace MicroserviceTest.Api.User.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id)
+        public async Task<IActionResult> Delete(string id)
         {
             var result = await userService.DeleteAsync(id);
 

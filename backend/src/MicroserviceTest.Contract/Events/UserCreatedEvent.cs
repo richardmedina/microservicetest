@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace MicroserviceTest.Contract.Events
 {
-    public record UserCreatedEvent(string UserName, string FirstName, string LastName) : IEvent;
+    public record UserCreatedEvent(string Id, string UserName, string Password) : IEvent;
 }

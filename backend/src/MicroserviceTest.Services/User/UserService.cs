@@ -13,20 +13,20 @@ namespace MicroserviceTest.Services.User
     {
         private readonly List<UserDto> users = new List<UserDto>();
 
-        private long GetNextId() => users.Count == 0 ? 1 : users.Max(u => u.Id) + 1;
+        private string GetNextId() => Guid.NewGuid().ToString();
 
         public async Task<bool> CreateAsync(CreateUserDto createUserDto)
         {
             await Task.CompletedTask;
 
-            var user = new UserDto(GetNextId(), createUserDto.UserName, createUserDto.FirstName, createUserDto.LastName);
+            var user = new UserDto(GetNextId(), createUserDto.UserName, createUserDto.Password);
 
             users.Add(user);
 
             return true;
         }
 
-        public async Task<bool> DeleteAsync(long id)
+        public async Task<bool> DeleteAsync(string id)
         {
             await Task.CompletedTask;
             var index = users.FindIndex(u => u.Id == id);
@@ -47,7 +47,7 @@ namespace MicroserviceTest.Services.User
             return users;
         }
 
-        public async Task<UserDto?> ReadAsync(long id)
+        public async Task<UserDto?> ReadAsync(string id)
         {
             await Task.CompletedTask;
             var user = users.FirstOrDefault(u => u.Id == id);
@@ -55,14 +55,14 @@ namespace MicroserviceTest.Services.User
             return user;
         }
 
-        public async Task<bool> UpdateAsync(long id, UpdateUserDto updateUserDto)
+        public async Task<bool> UpdateAsync(UpdateUserDto updateUserDto)
         {
             await Task.CompletedTask;
 
-            var index = users.FindIndex(u => u.Id == id);
+            var index = users.FindIndex(u => u.Id == updateUserDto.Id);
             if (index > -1)
             {
-                users[index] = new UserDto(id, updateUserDto.UserName, updateUserDto.FirstName, updateUserDto.LastName);
+                users[index] = new UserDto(updateUserDto.Id, updateUserDto.UserName, updateUserDto.Password);
                 return true;
             }
             return false;
