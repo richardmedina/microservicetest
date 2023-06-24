@@ -1,5 +1,7 @@
-﻿using MicroserviceTest.Common.Core.Messaging;
+﻿using MicroserviceTest.Common.Core.Data;
+using MicroserviceTest.Common.Core.Messaging;
 using MicroserviceTest.Contract.Core.Messaging;
+using MicroserviceTest.CoreServices.Data;
 using MicroserviceTest.CoreServices.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,6 +18,12 @@ namespace MicroserviceTest.CoreServices
         {
             services.Configure(options);
             services.AddSingleton<IMessageConsumerCoreService, MessageConsumerCoreService>();
+        }
+
+        public static void AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IMongoDatabase, MongoDatabase>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

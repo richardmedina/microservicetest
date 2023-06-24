@@ -1,4 +1,6 @@
-﻿using MicroserviceTest.Common.Services;
+﻿using MicroserviceTest.Common.Core.Data;
+using MicroserviceTest.Common.Services;
+using MicroserviceTest.Contract.Core.Data;
 using MicroserviceTest.Contract.Dtos.User;
 using System;
 using System.Collections.Generic;
@@ -12,11 +14,26 @@ namespace MicroserviceTest.Services.User
     public class UserService : IUserService
     {
         private readonly List<UserDto> users = new List<UserDto>();
-
         private string GetNextId() => Guid.NewGuid().ToString();
+
+        private IUserRepository _userRepository;
+
+        public UserService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
 
         public async Task<bool> CreateAsync(CreateUserDto createUserDto)
         {
+            var userData = new UserData
+            {
+                UserName = createUserDto.UserName,
+                Password = createUserDto.Password,
+            };
+
+            await _userRepository.CreateAsync(userData);
+            return true;
+            /*
             await Task.CompletedTask;
 
             var user = new UserDto(GetNextId(), createUserDto.UserName, createUserDto.Password);
@@ -24,6 +41,7 @@ namespace MicroserviceTest.Services.User
             users.Add(user);
 
             return true;
+            */
         }
 
         public async Task<bool> DeleteAsync(string id)
