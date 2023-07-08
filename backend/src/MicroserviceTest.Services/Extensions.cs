@@ -15,7 +15,7 @@ namespace MicroserviceTest.Services
         public static void RegisterBusinessServices(this IServiceCollection services)
         {
             services.AddScoped<IEmailService, EmailService>();
-            services.AddSingleton<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }
