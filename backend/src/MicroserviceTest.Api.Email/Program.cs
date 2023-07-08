@@ -16,7 +16,7 @@ builder.Services.AddMessageConsumer(options => {
 builder.Services.AddHostedService<MessageConsumerBackgroundService>();
 
 builder.Services.RegisterBusinessServices();
-builder.Services.AddRepositories();
+builder.Services.AddMongoDb(builder.Configuration.GetSection("Mongo"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
