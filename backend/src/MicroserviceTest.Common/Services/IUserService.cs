@@ -10,9 +10,9 @@ namespace MicroserviceTest.Common.Services
     public interface IUserService
     {
         Task<bool>CreateAsync(CreateUserDto createUserDto);
-        Task<UserDto?> ReadAsync(long id);
+        Task<UserDto?> ReadAsync(string id);
         Task<IEnumerable<UserDto>> ReadAllAsync();
-        Task<bool> UpdateAsync(long id, UpdateUserDto updateUserDto);
-        Task<bool> DeleteAsync(long id);
+        Task<bool> UpdateAsync(UpdateUserDto updateUserDto);
+        Task<bool> DeleteAsync(string id);
     }
 }

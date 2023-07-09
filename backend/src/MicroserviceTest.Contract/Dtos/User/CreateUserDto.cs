@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace MicroserviceTest.Contract.Dtos.User
 {
-    public record CreateUserDto(string UserName, string FirstName, string LastName);
+    public record CreateUserDto(string UserName, string Password);
 }
