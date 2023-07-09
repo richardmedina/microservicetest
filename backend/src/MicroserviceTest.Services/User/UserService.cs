@@ -13,9 +13,6 @@ namespace MicroserviceTest.Services.User
 {
     public class UserService : IUserService
     {
-        private readonly List<UserDto> users = new List<UserDto>();
-        private string GetNextId() => Guid.NewGuid().ToString();
-
         private IUserRepository _userRepository;
 
         public UserService(IUserRepository userRepository)
@@ -33,57 +30,39 @@ namespace MicroserviceTest.Services.User
 
             await _userRepository.CreateAsync(userData);
             return true;
-            /*
-            await Task.CompletedTask;
-
-            var user = new UserDto(GetNextId(), createUserDto.UserName, createUserDto.Password);
-
-            users.Add(user);
-
-            return true;
-            */
         }
 
         public async Task<bool> DeleteAsync(string id)
         {
-            await Task.CompletedTask;
-            var index = users.FindIndex(u => u.Id == id);
-
-            if (index > -1)
-            {
-                users.RemoveAt(index);
-                return true;
-            }
-
-            return false;
+            return await _userRepository.DeleteAsync(id);
         }
 
         public async Task<IEnumerable<UserDto>> ReadAllAsync()
         {
-            await Task.CompletedTask;
+            var userDatas = await _userRepository.ReadAsync();
 
-            return users;
+            return userDatas.Select(userData => new UserDto(userData.Id, userData.UserName, userData.Password));
         }
 
         public async Task<UserDto?> ReadAsync(string id)
         {
-            await Task.CompletedTask;
-            var user = users.FirstOrDefault(u => u.Id == id);
+            var user = await _userRepository.ReadAsync(id);
 
-            return user;
+            return user != null
+                ? new UserDto(user.Id, user.UserName, user.Password)
+                : null;
         }
 
         public async Task<bool> UpdateAsync(UpdateUserDto updateUserDto)
         {
-            await Task.CompletedTask;
-
-            var index = users.FindIndex(u => u.Id == updateUserDto.Id);
-            if (index > -1)
+            var userData = new UserData
             {
-                users[index] = new UserDto(updateUserDto.Id, updateUserDto.UserName, updateUserDto.Password);
-                return true;
-            }
-            return false;
+                Id = updateUserDto.Id,
+                UserName = updateUserDto.UserName,
+                Password = updateUserDto.Password
+            };
+
+            return await _userRepository.UpdateAsync(userData);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace MicroserviceTest.CoreServices.Data
 
         public BaseRepository(IMongoDatabase mongoDatabase) : base (mongoDatabase)
         {
-            Collection = MongoDatabase.GetCollectionAsync<TCollection>();
+            Collection = MongoDatabase.GetCollectionAsync<TCollection>().Result;
         }
     }
 }

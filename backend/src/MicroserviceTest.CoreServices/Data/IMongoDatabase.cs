@@ -4,6 +4,6 @@ namespace MicroserviceTest.CoreServices.Data
 {
     public interface IMongoDatabase
     {
-        IMongoCollection<TCollection> GetCollectionAsync<TCollection>();
+        Task<IMongoCollection<TCollection>> GetCollectionAsync<TCollection>();
     }
 }

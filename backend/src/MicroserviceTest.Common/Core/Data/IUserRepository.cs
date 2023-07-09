@@ -10,8 +10,9 @@ namespace MicroserviceTest.Common.Core.Data
     public interface IUserRepository
     {
         Task CreateAsync(UserData userData);
-        Task<UserData> ReadAsync(string id);
-        Task UpdateAsync(UserData userData);
-        Task DeleteAsync(string id);
+        Task<IEnumerable<UserData>> ReadAsync();
+        Task<UserData?> ReadAsync(string id);
+        Task<bool> UpdateAsync(UserData userData);
+        Task<bool> DeleteAsync(string id);
     }
 }

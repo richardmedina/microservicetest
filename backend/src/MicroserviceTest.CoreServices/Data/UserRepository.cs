@@ -1,6 +1,7 @@
 ﻿using MicroserviceTest.Common.Core.Data;
 using MicroserviceTest.Contract.Core.Data;
 using MicroserviceTest.CoreServices.Data.Collections;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,10 @@ namespace MicroserviceTest.CoreServices.Data
 {
     public class UserRepository : BaseRepository, IUserRepository
     {
+        private IMongoCollection<UserMongo> userCollection;
         public UserRepository(IMongoDatabase mongoDatabase) : base(mongoDatabase)
         {
+            userCollection = MongoDatabase.GetCollectionAsync<UserMongo>().Result;
         }
 
         public async Task CreateAsync(UserData userData)
@@ -25,21 +28,49 @@ namespace MicroserviceTest.CoreServices.Data
                 Password = userData.Password,
             };
 
-            var collection = MongoDatabase.GetCollectionAsync<UserMongo>();
-            collection.InsertOne(userMongo);
+            userCollection.InsertOne(userMongo);
         }
 
-        public Task DeleteAsync(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var filter = new FilterDefinitionBuilder<UserMongo>().Eq(user => user.Id, id);
+            await userCollection.DeleteOneAsync(filter);
+
+            return true;
         }
 
-        public Task<UserData> ReadAsync(string id)
+        public async Task<IEnumerable<UserData>> ReadAsync()
         {
-            throw new NotImplementedException();
+            var filter = new FilterDefinitionBuilder<UserMongo>().Empty;
+            
+            var cursor = await userCollection.FindAsync(filter);
+
+            return cursor.ToList().Select(user => new UserData
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Password = user.Password
+            });
         }
 
-        public Task UpdateAsync(UserData userData)
+        public async Task<UserData?> ReadAsync(string id)
+        {
+            var filter = new FilterDefinitionBuilder<UserMongo>().Eq(user => user.Id, id);
+
+            var cursor = await userCollection.FindAsync(filter);
+            var user = cursor.FirstOrDefault();
+
+            return user != null
+                ? new UserData
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Password = user.Password
+                }
+                : null;
+        }
+
+        public Task<bool> UpdateAsync(UserData userData)
         {
             throw new NotImplementedException();
         }
