@@ -26,8 +26,9 @@ namespace MicroserviceTest.CoreServices.Data
             _mongoClient = new MongoClient(_options.ConnectionString);
         }
 
-        public IMongoCollection<TCollection> GetCollectionAsync<TCollection>()
+        public async Task<IMongoCollection<TCollection>> GetCollectionAsync<TCollection>()
         {
+            await Task.CompletedTask;
             var collectionName = typeof(TCollection).GetCustomAttribute<BsonCollectionAttribute>()?.Collection ?? typeof(TCollection).Name;
 
             return _mongoClient.GetDatabase(_options.Database).GetCollection<TCollection>(collectionName);
