@@ -36,16 +36,18 @@ namespace MicroserviceTest.Api.SharedControllers.Controllers
 
         public static async Task<InfoResponse> GetClientAndServerInfoAsync(HttpContext httpContext)
         {
+            await Task.CompletedTask;
+
             var serverHostName = Dns.GetHostName();
-            var clientHostEntry = await Dns.GetHostEntryAsync(httpContext.Connection.RemoteIpAddress);
+            var clientHostname = httpContext.Connection.RemoteIpAddress;
 
             return new InfoResponse
             {
                 Timestamp = DateTime.Now,
                 ServerHostName = serverHostName,
                 ServerIP = string.Join(",", Dns.GetHostAddresses(serverHostName).Select(ip => ip.ToString())),
-                ClientHostName = clientHostEntry?.HostName ?? string.Empty,
-                ClientIP = httpContext.Connection.RemoteIpAddress.ToString(),
+                ClientHostName = clientHostname.ToString(),
+                ClientIP = clientHostname.ToString(),
             };
         }
     }
