@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MicroserviceTest.Api.Common\MicroserviceTest.Api.Common.csproj" />
     <ProjectReference Include="..\MicroserviceTest.Common\MicroserviceTest.Common.csproj" />
     <ProjectReference Include="..\MicroserviceTest.Contract\MicroserviceTest.Contract.csproj" />
     <ProjectReference Include="..\MicroserviceTest.CoreServices\MicroserviceTest.CoreServices.csproj" />
