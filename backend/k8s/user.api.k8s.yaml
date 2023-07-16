@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservicetest-api-user
+  labels:
+    app: microservicetest-api-user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservicetest-api-user
+  template:
+    metadata:
+      labels:
+        app: microservicetest-api-user
+    spec:
+      containers:
+      - name: microservicetest-api-user
+        image: ricki9/microservicetest.api.user
+        imagePullPolicy: Always
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-microservicetest-api-user 
+spec:
+  type: NodePort 
+  selector:
+    app: microservicetest-api-user
+  ports:
+  - protocol: TCP
+    nodePort: 31000
+    port: 80
+    targetPort: 80
