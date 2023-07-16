@@ -1,4 +1,5 @@
 ﻿using MicroserviceTest.Api.Email.Models.Email;
+using MicroserviceTest.Api.SharedControllers.Controllers;
 using MicroserviceTest.Common.Core.Messaging;
 using MicroserviceTest.Common.Services;
 using MicroserviceTest.Contract.Events;
@@ -8,7 +9,7 @@ namespace MicroserviceTest.Api.Email.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class EmailController : ControllerBase
+    public class EmailController : MicroSharedController
     {
         private readonly IEmailService emailService;
         private readonly IMessageProducerCoreService _messageProducer;
