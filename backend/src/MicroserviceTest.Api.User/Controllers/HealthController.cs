@@ -13,7 +13,7 @@ namespace MicroserviceTest.Api.User.Controllers
             return StatusCode(StatusCodes.Status200OK);
         }
 
-        [HttpGet("test")]
+        [HttpGet("test/{statusCodeToReturn}")]
         public async Task<IActionResult> Test(int statusCodeToReturn = 200)
         {
             await Task.CompletedTask;
