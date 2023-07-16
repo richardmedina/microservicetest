@@ -1,15 +1,16 @@
-﻿using MicroserviceTest.Common.Core.Messaging;
+﻿using MicroserviceTest.Api.SharedControllers.Controllers;
+using MicroserviceTest.Common.Core.Messaging;
 using MicroserviceTest.Common.Services;
 using MicroserviceTest.Contract.Dtos.User;
 using MicroserviceTest.Contract.Events;
-using MicroserviceTest.Contract.Model.User;
+using MicroserviceTest.Contract.Models.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MicroserviceTest.Api.User.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class UserController: ControllerBase
+    public class UserController: MicroSharedController
     {
         private readonly IUserService userService;
         private readonly IMessageProducerCoreService messageProducer;
