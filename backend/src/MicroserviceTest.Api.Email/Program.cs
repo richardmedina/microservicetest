@@ -25,13 +25,14 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+var swaggerEnabled = builder.Configuration.GetValue<bool>("SwaggerEnabled");
+
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || swaggerEnabled)
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
