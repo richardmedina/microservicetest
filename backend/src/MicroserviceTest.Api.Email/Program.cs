@@ -1,19 +1,22 @@
 using MicroserviceTest.Api.Email.EventHandlers;
 using MicroserviceTest.Common.Handlers;
-using MicroserviceTest.Contract.Events;
 using MicroserviceTest.Services;
 using MicroserviceTest.CoreServices;
-using MicroserviceTest.Api.Email.HostedServices;
+using MicroserviceTest.Common.Events.User;
+using MicroserviceTest.Common.Events.Unknown;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<IEventHandler<UserCreatedEvent>, UserCreatedEventHandler>();
-builder.Services.AddMessageProducer();
-builder.Services.AddMessageConsumer(options => { 
-    options.Topics = new []{ "usercreated" };
+builder.Services.AddSingleton<IEventHandler<UserCreatedEvent>, UserCreatedEventHandler>();
+builder.Services.AddSingleton<IEventHandler<UnknownEvent>, UnknownEventHandler>();
+//builder.Services.AddMessageProducer();
+builder.Services.AddMessageConsumer(options => {
+    options.Topics = new[] { 
+        typeof(UserCreatedEvent)
+        //typeof(UnknownEvent) 
+    };
 });
-builder.Services.AddHostedService<MessageConsumerBackgroundService>();
 
 builder.Services.RegisterBusinessServices();
 builder.Services.AddMongoDb(builder.Configuration.GetSection("Mongo"));

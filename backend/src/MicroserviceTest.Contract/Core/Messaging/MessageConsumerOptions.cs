@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MicroserviceTest.Contract.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,11 @@ namespace MicroserviceTest.Contract.Core.Messaging
 {
     public class MessageConsumerOptions
     {
-        public IEnumerable<string> Topics = null!;
+        public IEnumerable<Type> Topics = null!;
+
+        public void SubscribeToEvent<TEvent>(TEvent tEvent) where TEvent : IEvent
+        {
+
+        }
     }
 }

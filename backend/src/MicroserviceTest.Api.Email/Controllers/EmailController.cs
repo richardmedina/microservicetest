@@ -1,6 +1,9 @@
 ﻿using MicroserviceTest.Api.Email.Models.Email;
 using MicroserviceTest.Api.SharedControllers.Controllers;
 using MicroserviceTest.Common.Core.Messaging;
+using MicroserviceTest.Common.Events.Unknown;
+using MicroserviceTest.Common.Events.User;
+using MicroserviceTest.Common.Handlers;
 using MicroserviceTest.Common.Services;
 using MicroserviceTest.Contract.Events;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +16,26 @@ namespace MicroserviceTest.Api.Email.Controllers
     {
         private readonly IEmailService emailService;
         private readonly IMessageProducerCoreService _messageProducer;
-        public EmailController(IEmailService emailService, IMessageProducerCoreService messageProducer)
+        public EmailController(
+            IEmailService emailService, 
+            IMessageProducerCoreService messageProducer, 
+            IServiceProvider serviceProvider,
+            IEventHandler<UserCreatedEvent> userCreatedEventHandler,
+            IEventHandler<UnknownEvent> unknownEventHandler,
+            IEnumerable<IEventHandler> handlers)
         {
             this.emailService = emailService;
             _messageProducer = messageProducer;
+
+            var services = serviceProvider.GetServices<IEventHandler<IEvent>>();
+            var services2 = serviceProvider.GetServices<object>();
+            var services3 = serviceProvider.GetServices<IEventHandler>();
+            var services4 = serviceProvider.GetServices<IEventHandler<UserCreatedEvent>>();
+
+            var s= serviceProvider.GetServices(typeof(IEventHandler<IEvent>));
+            var s2 = serviceProvider.GetServices(typeof(object));
+            var s3 = serviceProvider.GetServices(typeof(IEventHandler));
+
         }
 
         [HttpPost("send")]

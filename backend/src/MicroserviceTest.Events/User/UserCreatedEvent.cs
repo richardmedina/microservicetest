@@ -1,10 +1,12 @@
-﻿using System;
+﻿using MicroserviceTest.Contract.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MicroserviceTest.Contract.Events
+namespace MicroserviceTest.Events.User
 {
+    [MessageConsumerTopic("usercreated")]
     public record UserCreatedEvent(string Id, string UserName, string Password) : IEvent;
 }

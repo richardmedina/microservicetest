@@ -1,8 +1,8 @@
 ﻿using MicroserviceTest.Api.SharedControllers.Controllers;
 using MicroserviceTest.Common.Core.Messaging;
+using MicroserviceTest.Common.Events.User;
 using MicroserviceTest.Common.Services;
 using MicroserviceTest.Contract.Dtos.User;
-using MicroserviceTest.Contract.Events;
 using MicroserviceTest.Contract.Models.User;
 using Microsoft.AspNetCore.Mvc;
 

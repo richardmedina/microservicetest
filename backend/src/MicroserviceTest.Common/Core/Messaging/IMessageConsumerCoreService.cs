@@ -9,6 +9,6 @@ namespace MicroserviceTest.Common.Core.Messaging
 {
     public interface IMessageConsumerCoreService
     {
-        Task<ConsumerMessage> ConsumeAsync(CancellationToken cancellationToken);
+        Task StartConsumingAsync(CancellationToken cancellationToken);
     }
 }

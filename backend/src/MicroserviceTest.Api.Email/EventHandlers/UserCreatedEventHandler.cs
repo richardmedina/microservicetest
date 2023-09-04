@@ -1,5 +1,5 @@
-﻿using MicroserviceTest.Common.Handlers;
-using MicroserviceTest.Contract.Events;
+﻿using MicroserviceTest.Common.Events.User;
+using MicroserviceTest.Common.Handlers;
 
 namespace MicroserviceTest.Api.Email.EventHandlers
 {
@@ -12,11 +12,13 @@ namespace MicroserviceTest.Api.Email.EventHandlers
             _logger = logger;
         }
 
-        public async Task HandleAsync(UserCreatedEvent evt)
+        public async Task<bool> HandleAsync(UserCreatedEvent evt)
         {
             await Task.CompletedTask;
 
             _logger.LogInformation("Sending Email: Handling event for UserCreated event");
+
+            return true;
         }
     }
 }

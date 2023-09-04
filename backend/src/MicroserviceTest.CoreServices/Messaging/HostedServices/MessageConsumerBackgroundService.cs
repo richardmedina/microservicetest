@@ -1,6 +1,8 @@
 ﻿using MicroserviceTest.Common.Core.Messaging;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-namespace MicroserviceTest.Api.Email.HostedServices
+namespace MicroserviceTest.CoreServices.Messaging.HostedServices
 {
     public class MessageConsumerBackgroundService : BackgroundService
     {
@@ -22,12 +24,9 @@ namespace MicroserviceTest.Api.Email.HostedServices
 
         private async Task DoWork(CancellationToken cancellationToken)
         {
-            while (!cancellationToken.IsCancellationRequested)
-            {
-                _logger.LogInformation("_messageConsumer.ConsumeAsync(cancellationToken)...");
-                var message = await _messageConsumer.ConsumeAsync(cancellationToken);
-                _logger.LogInformation("Message Received");
-            }
+            _logger.LogInformation("_messageConsumer.StartConsuming(cancellationToken)...");
+            await _messageConsumer.StartConsumingAsync(cancellationToken);
+            _logger.LogInformation("Closing Consumer...");
         }
 
         public override async Task StopAsync(CancellationToken cancellationToken)

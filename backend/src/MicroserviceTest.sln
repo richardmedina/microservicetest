@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroserviceTest.Contract",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroserviceTest.CoreServices", "MicroserviceTest.CoreServices\MicroserviceTest.CoreServices.csproj", "{76B2C60C-0066-4C48-A8FF-AA6E06B4641B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroserviceTest.Api.Common", "MicroserviceTest.Api.Common\MicroserviceTest.Api.Common.csproj", "{5A5BB1E7-D2DE-4E4C-8618-151686A28C4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroserviceTest.Api.Common", "MicroserviceTest.Api.Common\MicroserviceTest.Api.Common.csproj", "{5A5BB1E7-D2DE-4E4C-8618-151686A28C4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

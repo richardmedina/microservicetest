@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Email\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MicroserviceTest.Api.Common\MicroserviceTest.Api.Common.csproj" />
+    <ProjectReference Include="..\MicroserviceTest.Contract\MicroserviceTest.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

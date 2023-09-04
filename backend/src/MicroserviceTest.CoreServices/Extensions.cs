@@ -4,6 +4,7 @@ using MicroserviceTest.Contract.Core.Messaging;
 using MicroserviceTest.CoreServices.Data;
 using MicroserviceTest.CoreServices.Data.Options;
 using MicroserviceTest.CoreServices.Messaging;
+using MicroserviceTest.CoreServices.Messaging.HostedServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +21,7 @@ namespace MicroserviceTest.CoreServices
         {
             services.Configure(options);
             services.AddSingleton<IMessageConsumerCoreService, MessageConsumerCoreService>();
+            services.AddHostedService<MessageConsumerBackgroundService>();
         }
 
         public static void AddMongoDb(this IServiceCollection services, IConfigurationSection configurationSection)
