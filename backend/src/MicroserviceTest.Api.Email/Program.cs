@@ -12,7 +12,7 @@ builder.Services.AddSingleton<IEventHandler<UserCreatedEvent>, UserCreatedEventH
 builder.Services.AddSingleton<IEventHandler<UnknownEvent>, UnknownEventHandler>();
 //builder.Services.AddMessageProducer();
 builder.Services.AddMessageConsumer(options => {
-    options.Topics = new[] { 
+    options.EventTypes = new[] { 
         typeof(UserCreatedEvent)
         //typeof(UnknownEvent) 
     };

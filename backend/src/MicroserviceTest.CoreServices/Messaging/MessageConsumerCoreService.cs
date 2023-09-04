@@ -38,7 +38,7 @@ namespace MicroserviceTest.CoreServices.Messaging
             consumerBuilder = new ConsumerBuilder<string, string>(consumerConfig);
             _messageConsumerOptions = options.Value;
             consumer = consumer = consumerBuilder.Build();
-            topicEventMappings = options.Value.Topics.ToDictionary(x => GetTopicNameFromEventType(x), y => y);
+            topicEventMappings = options.Value.EventTypes.ToDictionary(x => GetTopicNameFromEventType(x), y => y);
 
             consumer.Subscribe(topicEventMappings.Keys);
         }

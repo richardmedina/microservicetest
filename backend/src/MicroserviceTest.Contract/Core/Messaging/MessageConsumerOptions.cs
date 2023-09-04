@@ -9,7 +9,7 @@ namespace MicroserviceTest.Contract.Core.Messaging
 {
     public class MessageConsumerOptions
     {
-        public IEnumerable<Type> Topics = null!;
+        public IEnumerable<Type> EventTypes = null!;
 
         public void SubscribeToEvent<TEvent>(TEvent tEvent) where TEvent : IEvent
         {
