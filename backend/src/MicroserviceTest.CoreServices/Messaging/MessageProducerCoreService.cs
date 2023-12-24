@@ -1,5 +1,6 @@
 ﻿using Confluent.Kafka;
 using MicroserviceTest.Common.Core.Messaging;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,23 +14,17 @@ namespace MicroserviceTest.CoreServices.Messaging
 {
     public class MessageProducerCoreService : IMessageProducerCoreService
     {
-        private ILogger<MessageProducerCoreService> _logger;
-        private ProducerConfig producerConfig = new ProducerConfig
-        {
-            BootstrapServers = "192.168.0.200:9092",
-            ClientId = "groupId",
-            //MessageTimeoutMs = 5000,
-        };
+        private readonly ILogger<MessageProducerCoreService> _logger;
+        private readonly IConfiguration _configuration;
 
-        private readonly ProducerBuilder<string, string> producerBuilder;
         private IProducer<string, string>? producer;
 
         private string topic = "usercreated";
 
-        public MessageProducerCoreService(ILogger<MessageProducerCoreService> logger)
+        public MessageProducerCoreService(ILogger<MessageProducerCoreService> logger, IConfiguration configuration)
         {
             _logger = logger;
-            producerBuilder = new ProducerBuilder<string, string>(producerConfig);
+            _configuration = configuration;
         }
 
         public async Task PublishAsync(string topic, string key, string value, CancellationToken cancelationToken = default)
@@ -38,6 +33,7 @@ namespace MicroserviceTest.CoreServices.Messaging
 
             if(producer == null)
             {
+                var producerBuilder = new ProducerBuilder<string, string>(CreateKafkaProducerConfig());
                 producer = producerBuilder.Build();
             }
 
@@ -63,6 +59,19 @@ namespace MicroserviceTest.CoreServices.Messaging
 
             await PublishAsync(topic, key, value, cancelationToken);
             _logger.LogInformation("PublishAsync<TMessage> End: Success");
+        }
+
+        private ProducerConfig CreateKafkaProducerConfig()
+        {
+            var section = _configuration.GetSection("Kafka");
+            var bootstrapServers = section["BootstrapServers"] ?? string.Empty;
+            var clientId = section["ClientId"] ?? string.Empty;
+
+            return new ProducerConfig
+            {
+                BootstrapServers = bootstrapServers,
+                ClientId = clientId,
+            };
         }
     }
 }
